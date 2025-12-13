@@ -16,7 +16,7 @@ void print_array(int arr[], const size_t size){
 }
 
 // Swap items in the array
-void swap(int arr[], const int index1, const int index2){
+void swap(int arr[], const size_t index1, const size_t index2){
 	int temp=arr[index1];
 	arr[index1]=arr[index2];
 	arr[index2]=temp;
@@ -26,7 +26,7 @@ void swap(int arr[], const int index1, const int index2){
 /*	====	SORTING ALGORITHMS	====	*/
 /*	================================	*/
 
-void selection(int arr[], const int size){
+void selection(int arr[], const size_t size){
 	for(size_t i=0; i<size; i++){
 		int max = i;
 		for(int j=i+1; j<size; j++){
@@ -38,10 +38,11 @@ void selection(int arr[], const int size){
 	}
 }
 
-void selection_rev(int arr[], const int size){
+void selection_rev(int arr[], const size_t size){
 	for(size_t i=size-1; i>0; i--){
-		int max = i;
-		for(int j=i-1; j>=0; j--){
+		size_t max = i;
+
+		for(size_t j=0; j<i; j++){
 			if(arr[max] < arr[j]) 
 				max = j;
 		}
@@ -57,28 +58,27 @@ void selection_rev(int arr[], const int size){
  * Nella versione selection, l’inner loop scorre verso l’alto (j++), 
  * e questo può portare a più cache miss, soprattutto su array grandi. */
 
-void bubble(int arr[], const int size){
+void bubble(int arr[], const size_t size){
 	bool ordinated = false;	
 	while(!ordinated){
-		//counter++;
 		ordinated = true;
-		for(int j=0; j<size-1; j++){
-			if(arr[j]>arr[j+1]){ 
-				ordinated=false;
-				swap(arr, j, j+1);
+		for(size_t i=0; i<size-1; i++){
+			if(arr[i]>arr[i+1]){ 
+			    ordinated=false;
+			    swap(arr, i, i+1);
 			}
 		}
 	}
 }
 
-void insertion_sort(int arr[], const int size){
-	for(int i = 1; i < size; i++){
-    	int selected = arr[i];
-    	int j = i;
-    	for(; j >= 1 && selected < arr[j - 1]; j--)
+void insertion(int arr[], const size_t size){
+	for(size_t i=1; i<size; i++){
+	   int selected = arr[i];
+	   size_t j = i;
+	   for(; j >= 1 && selected < arr[j - 1]; j--)
       		arr[j] = arr[j - 1];
 
-      	arr[j] = selected;
+	    arr[j] = selected;
 	}
 }
 
@@ -189,24 +189,32 @@ int main(void){
 	selection_rev(array, n);
 	clock_t end = clock();
 	double time_spent = (double)(end-start)/CLOCKS_PER_SEC;
-	printf("Selection reversed sort ha impiegato\t%f secondi\n", time_spent);
+	printf("Selection rev time: \t%f s\n", time_spent);
 
 	start = clock();
 	selection(array, n);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
-	printf("Selection sort ha impiegato\t\t%f secondi\n", time_spent);
-	
+	printf("Selection sort time:\t%f s\n", time_spent);
+
 	start = clock();
 	bubble(array, n);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
-	printf("Bubble sort ha impiegato\t\t%f secondi\n", time_spent);
+	printf("Bubble sort time:\t%f s\n", time_spent);
 	
+	start = clock();
+	insertion(array, n);
+	end = clock();
+	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
+        printf("Insertion sort time:\t%f s\n", time_spent);
+      
 
-	/*
-	printf("Quick sort: ");
+	/*start = clock();
 	quick_sort(array, 0, N-1);
+	end = clock();
+	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
+	printf("Quick sort time:\t%f s", time_spent); 
 	*/
 	
 	/*
