@@ -176,14 +176,22 @@ void heap_sort(int arr[], const int size){
 /* -- THIS IS THE MAIN -- */
 
 int main(void){
-	size_t n = N;
+    printf("SORTING ALGORITHMS AND THEIR EXECUTION TIME\n");
+    int choice;
+    printf("Press Ctrl+Z on Windows or Ctrl+D on Linux/MacOS to end the program," 
+    "any other key to continue\n");
+    scanf("%d", &choice);
+    while( (choice=getchar()) != EOF ){
+	printf("Inserisci il numero di elementi dell'array: ");
+	size_t n;
+	scanf("%zu", &n);
 
+	printf("Riempimento array...\n");
 	srand(time(NULL));
 	int array[n];
-	for(size_t i=0; i<n; i++){
+	for(size_t i=0; i<n; i++)
 		array[i] = rand();
-	}
-	
+    
 	// Selection sort
 	clock_t start = clock();
 	selection_rev(array, n);
@@ -226,5 +234,5 @@ int main(void){
 	cout<<"Merge sort: ";
 	merge_sort(array, 0, N-1);
 	*/
-
+    }
 }
