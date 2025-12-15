@@ -23,7 +23,7 @@ void swap(int arr[], const size_t index1, const size_t index2){
 }
 
 /*	================================	*/
-/*	====	SORTING ALGORITHMS	====	*/
+/*	====	SORTING ALGORITHMS  ====	*/
 /*	================================	*/
 
 void selection(int arr[], const size_t size){
@@ -177,21 +177,28 @@ void heap_sort(int arr[], const int size){
 
 int main(void){
     printf("SORTING ALGORITHMS AND THEIR EXECUTION TIME\n");
-    int choice;
     printf("Press Ctrl+Z on Windows or Ctrl+D on Linux/MacOS to end the program," 
-    "any other key to continue\n");
-    scanf("%d", &choice);
-    while( (choice=getchar()) != EOF ){
-	printf("Inserisci il numero di elementi dell'array: ");
-	size_t n;
-	scanf("%zu", &n);
+    " any other key to continue\n");
+    
+    while( getchar() != EOF ){
+	printf("Enter the array size; the number of items must be greater then zero: ");
+	int tmp_n;
+	scanf("%d", &tmp_n);
+	while(tmp_n<=0){
+	    printf("You entered zero/negative number; size must be greater then 0: ");
+	    scanf("%d", &tmp_n);
+	}
 
-	printf("Riempimento array...\n");
+	size_t n = (size_t)tmp_n;
+
+	printf("Filling the array with random numbers...");
 	srand(time(NULL));
 	int array[n];
 	for(size_t i=0; i<n; i++)
 		array[i] = rand();
-    
+	printf("Done.\n");
+
+	printf("Starting sorting algorithms...\n");
 	// Selection sort
 	clock_t start = clock();
 	selection_rev(array, n);
@@ -234,5 +241,12 @@ int main(void){
 	cout<<"Merge sort: ";
 	merge_sort(array, 0, N-1);
 	*/
+
+	printf("Done.\n");
+
+	printf("Press Ctrl+Z on Windows or Ctrl+D on Linux/MacOS to end the program," 
+    " any other key to continue\n");
+	if(getchar()=='\n')
+		;
     }
 }
