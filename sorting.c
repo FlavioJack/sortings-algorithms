@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define N 10000
 
@@ -194,53 +195,62 @@ int main(void){
 	printf("Filling the array with random numbers...");
 	srand(time(NULL));
 	int array[n];
+	int wrkarr[n];
 	for(size_t i=0; i<n; i++)
 		array[i] = rand();
 	printf("Done.\n");
+	 
 
 	printf("Starting sorting algorithms...\n");
 	// Selection sort
+	memcpy(wrkarr, array, sizeof(array));
 	clock_t start = clock();
-	selection_rev(array, n);
+	selection_rev(wrkarr, n);
 	clock_t end = clock();
 	double time_spent = (double)(end-start)/CLOCKS_PER_SEC;
 	printf("Selection rev time: \t%f s\n", time_spent);
 
+	memcpy(wrkarr, array, sizeof(array));
 	start = clock();
-	selection(array, n);
+	selection(wrkarr, n);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
 	printf("Selection sort time:\t%f s\n", time_spent);
 
+	memcpy(wrkarr, array, sizeof(array));
 	start = clock();
-	bubble(array, n);
+	bubble(wrkarr, n);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
 	printf("Bubble sort time:\t%f s\n", time_spent);
 	
+	memcpy(wrkarr, array, sizeof(array));
 	start = clock();
-	insertion(array, n);
+	insertion(wrkarr, n);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
         printf("Insertion sort time:\t%f s\n", time_spent);
       
-
-	/*start = clock();
-	quick_sort(array, 0, N-1);
+	memcpy(wrkarr, array, sizeof(array));
+	start = clock();
+	quick_sort(wrkarr, 0, n-1);
 	end = clock();
 	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
-	printf("Quick sort time:\t%f s", time_spent); 
-	*/
+	printf("Quick sort time:\t%f s\n", time_spent); 
 	
-	/*
-	printf("Heap sort: ");
-	heap_sort(array, N);
-	*/
+	memcpy(wrkarr, array, sizeof(array));
+	start = clock();
+	heap_sort(wrkarr, n);
+	end = clock();
+	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
+	printf("Heap sort time:\t\t%f s\n", time_spent);
 
-	/*
-	cout<<"Merge sort: ";
-	merge_sort(array, 0, N-1);
-	*/
+	memcpy(wrkarr, array, sizeof(array));
+	start = clock();
+	merge_sort(wrkarr, 0, n-1);
+	end = clock();
+	time_spent = (double)(end-start)/CLOCKS_PER_SEC;
+	printf("Merge sort time:\t%f s\n", time_spent);
 
 	printf("Done.\n");
 
