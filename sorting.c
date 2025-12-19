@@ -182,6 +182,7 @@ int main(void){
     " any other key to continue\n");
     
     while( getchar() != EOF ){
+	
 	printf("Enter the array size; the number of items must be greater then zero: ");
 	int tmp_n;
 	scanf("%d", &tmp_n);
@@ -189,20 +190,35 @@ int main(void){
 	    printf("You entered zero/negative number; size must be greater then 0: ");
 	    scanf("%d", &tmp_n);
 	}
-
 	size_t n = (size_t)tmp_n;
-
-	printf("Filling the array with random numbers...");
+	
+	printf("ARRAY FILLING VALUES\n1)Random values\n2)Already ordered values\n");
+	int choice;
+	printf("Choose: ");
+	scanf("%d", &choice);
+	while(choice<1 || choice>2){
+	    printf("You entered wrong value. 1)Random values or 2)Ordered values: ");
+	    scanf("%d", &choice);
+	}
+    
 	srand(time(NULL));
 	int array[n];
 	int wrkarr[n];
-	for(size_t i=0; i<n; i++)
-		array[i] = rand();
+
+	if(choice == 1){
+	    printf("Filling the array with random numbers...");
+	    for(size_t i=0; i<n; i++)
+	    	array[i] = rand();
+	}
+	else if(choice == 2){
+	    printf("Filling the array with ordered numbers...");
+	    for(size_t i=0; i<n; i++)
+		array[i]=i;
+	} 
 	printf("Done.\n");
-	 
 
 	printf("Starting sorting algorithms...\n");
-	// Selection sort
+	
 	memcpy(wrkarr, array, sizeof(array));
 	clock_t start = clock();
 	selection_rev(wrkarr, n);
@@ -255,7 +271,7 @@ int main(void){
 	printf("Done.\n");
 
 	printf("Press Ctrl+Z on Windows or Ctrl+D on Linux/MacOS to end the program," 
-    " any other key to continue\n");
+	" any other key to continue\n");
 	if(getchar()=='\n')
 		;
     }
