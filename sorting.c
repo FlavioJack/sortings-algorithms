@@ -84,6 +84,12 @@ void insertion(int arr[], const size_t size){
 }
 
 
+void quick_sort_iter(int arr[], const int left, const int right){
+	int pivot=arr[(right+left)/2];
+	int i=left, j=right;
+    
+}
+
 void quick_sort(int arr[], const int left, const int right){
 	int pivot=arr[(right+left)/2];
 	int i=left, j=right;
